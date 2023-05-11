@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
-
+import AddUser from './components/users/AddUser';
+import UsersList from './components/users/UsersList';
+import { useState } from 'react';
 function App() {
+  const [usersdata,updateusersdata]=useState([]);
+  const getuser = (username,age) =>
+  {
+    updateusersdata((prevusersdata) => {
+      return[...prevusersdata,{name:username,userage:age}]
+    })
+    console.log("In App");
+    console.log(username,age);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddUser getdata={getuser}></AddUser>
+      <UsersList data={usersdata}></UsersList>
     </div>
   );
 }
